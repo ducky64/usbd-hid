@@ -234,9 +234,13 @@ pub fn gen_hid_descriptor(args: TokenStream, input: TokenStream) -> TokenStream 
         #[repr(C, packed)]
         #decl
 
+        impl #ident {
+            pub const DESC: &'static [u8] = &#descriptor;
+        }
+
         impl SerializedDescriptor for #ident {
             fn desc() -> &'static[u8] {
-                &#descriptor
+                Self::DESC
             }
         }
     };
